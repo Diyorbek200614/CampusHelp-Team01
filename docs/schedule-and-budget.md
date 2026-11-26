@@ -139,3 +139,25 @@ Tools and services: GitHub Free, a web browser and a text editor — 0 UZS.
 | **Total** | | **45** | **2,250,000** |
 
 Actual hours are recorded in the Project Board field **Actual Hours** and compared with this baseline in the checkpoint and closure reports.
+
+## 8. Baseline revision 1 — schedule compression (26 Nov 2026)
+
+**Reason.** The project started late: the assignment had been issued about one week earlier and its submission deadline had already passed when work began on 26 Nov 2026. Continuing with the 10-working-day plan would have delivered the project two weeks after the deadline.
+
+**Decision (PM, 26 Nov 2026).** Keep the scope and the 45-hour effort estimate unchanged, but compress the schedule into a single working day using
+
+- **fast-tracking** — tasks without a hard dependency run in parallel (T01 ∥ T02, T04 ∥ T05 ∥ T06, T07 ∥ T08), and
+- **crashing** — all three roles are worked by one person in consecutive sessions on the same day, with AI assistance permitted by the lecturer.
+
+**Revised milestone dates.**
+
+| Milestone | Original baseline | Revised baseline |
+|---|---|---|
+| M1 – Project Initiation | 27 Nov 2026 (Day 2) | 26 Nov 2026 |
+| M2 – Project Planning | 1 Dec 2026 (Day 4) | 26 Nov 2026 |
+| M3 – Project Execution | 4 Dec 2026 (Day 7) | 26 Nov 2026 |
+| M4 – Monitoring and Closure | 9 Dec 2026 (Day 10) | 26 Nov 2026 |
+
+**Effect on monitoring.** The three progress checkpoints planned for Day 2, 5 and 8 are held at the equivalent points of the compressed day: after M1, after M2/M3 and before closure (`docs/monitoring/`).
+
+**Effect on budget and risk.** Planned effort and cost are unchanged (45 h, 2,250,000 UZS). Compression raises R1 (capacity) and R6 (missing evidence); both are covered by the verification step T11. The Day-6 change request (CR-01) is processed within the same day.
