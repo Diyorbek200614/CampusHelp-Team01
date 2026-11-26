@@ -19,7 +19,7 @@
 ## 2. WBS diagram
 
 ```mermaid
-flowchart TD
+flowchart LR
     P["1.0 CampusHelp Project"]
     P --> A["1.1 Initiation"]
     P --> B["1.2 Planning"]
