@@ -8,7 +8,7 @@ CampusHelp is a proposed web-based system where students submit service requests
 
 | Full name | Student ID | GitHub | Role |
 |---|---|---|---|
-| Diyorjon Sobirov | _(add)_ | [@Diyorbek200614](https://github.com/Diyorbek200614) | Project Manager (A), Business Analyst & Designer (B), Quality & Risk Coordinator (C) |
+| Diyorjon Sobirov | 4283260 | [@Diyorbek200614](https://github.com/Diyorbek200614) | Project Manager (A), Business Analyst & Designer (B), Quality & Risk Coordinator (C) |
 
 This is an individual submission: the lecturer allowed the assignment to be completed alone, so one student covers all three roles. Documents still state the role responsible for each task (A, B, C) so the division of work stays visible.
 
