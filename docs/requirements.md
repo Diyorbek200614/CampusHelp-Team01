@@ -54,7 +54,7 @@ quadrantChart
 | FR-09 | The dashboard shows counts of open (Submitted), ongoing (Assigned + In Progress) and completed (Resolved + Closed) requests. | Must | 6 |
 | FR-10 | The dashboard lists requests and can filter them by status, category and priority. | Should | 6 |
 | FR-11 | Every status change is stored with date and time in the request history. | Should | 5 |
-| FR-12 | The student receives an e-mail acknowledgment on submission. | **Out of scope** (see `change-request.md`) | — |
+| FR-12 | The student receives an e-mail acknowledgment on submission. | **Deferred — CR-01** (out of scope; see `change-request.md`) | — |
 
 ## 3. Non-functional requirements
 
