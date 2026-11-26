@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusHelp – Submit a request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <span class="logo">CampusHelp</span>
+  <nav><a href="index.html" class="active">Submit request</a><a href="track.html">Track</a><a href="admin.html">Admin</a></nav>
+</div></header>
+
+<main class="wrap">
+  <section id="formView">
+    <h1>Submit a service request</h1>
+    <p class="sub">IT support, classroom maintenance, library assistance or administrative services.</p>
+    <form id="reqForm" class="card" novalidate>
+      <div class="grid2">
+        <div class="field" data-f="studentId">
+          <label for="studentId">Student ID <span class="req">*</span></label>
+          <input type="text" id="studentId" name="studentId" autocomplete="off" placeholder="e.g. 20261234">
+          <div class="error"></div>
+        </div>
+        <div class="field" data-f="name">
+          <label for="name">Full name</label>
+          <input type="text" id="name" name="name" autocomplete="name">
+        </div>
+        <div class="field" data-f="email">
+          <label for="email">E-mail</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="name@student.university.uz">
+          <div class="error"></div>
+        </div>
+        <div class="field" data-f="category">
+          <label for="category">Category <span class="req">*</span></label>
+          <select id="category" name="category"><option value="">Select a category</option></select>
+          <div class="error"></div>
+        </div>
+      </div>
+      <div class="field" data-f="priority">
+        <fieldset>
+          <legend>Priority <span class="req">*</span></legend>
+          <div class="radios" id="priorities"></div>
+        </fieldset>
+        <div class="error"></div>
+      </div>
+      <div class="field" data-f="location">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="e.g. Room B-204">
+      </div>
+      <div class="field" data-f="description">
+        <label for="description">Description <span class="req">*</span></label>
+        <textarea id="description" name="description" placeholder="What happened? When? What do you need?"></textarea>
+        <div class="error"></div>
+      </div>
+      <p class="hint"><span class="req">*</span> required field</p>
+      <div class="actions"><button type="submit" class="btn btn-primary">Submit request</button></div>
+    </form>
+  </section>
+
+  <section id="confirmView" hidden>
+    <div class="card confirm">
+      <h2>✔ Your request has been submitted</h2>
+      <p>Request ID: <span class="rid" id="cId"></span></p>
+      <dl class="meta">
+        <dt>Category</dt><dd id="cCat"></dd>
+        <dt>Priority</dt><dd id="cPri"></dd>
+        <dt>Status</dt><dd id="cStatus"></dd>
+      </dl>
+      <p class="hint">Keep this ID to check the status of your request.</p>
+      <div class="actions">
+        <a class="btn btn-primary" id="cTrack" href="track.html">Track this request</a>
+        <button class="btn btn-light" id="again" type="button">Submit another request</button>
+      </div>
+    </div>
+  </section>
+
+  <p class="note">Prototype: data is stored only in this browser (simulated back end). No e-mail is sent.</p>
+</main>
+
+<script src="app.js"></script>
+<script>
+  const f = document.getElementById("reqForm");
+  const sel = document.getElementById("category");
+  CH.CATEGORIES.forEach(c => sel.add(new Option(c, c)));
+  document.getElementById("priorities").innerHTML = CH.PRIORITIES
+    .map(p => `<label><input type="radio" name="priority" value="${p}"> ${p}</label>`).join("");
+
+  f.addEventListener("submit", ev => {
+    ev.preventDefault();
+    const d = Object.fromEntries(new FormData(f).entries());
+    const errors = CH.validate(d);
+    f.querySelectorAll(".field").forEach(el => {
+      const msg = errors[el.dataset.f];
+      el.classList.toggle("invalid", !!msg);
+      const box = el.querySelector(".error");
+      if (box) box.textContent = msg || "";
+    });
+    if (Object.keys(errors).length) {
+      f.querySelector(".invalid input, .invalid select, .invalid textarea")?.focus();
+      return;
+    }
+    const r = CH.submit(d);
+    document.getElementById("cId").textContent = r.id;
+    document.getElementById("cCat").textContent = r.category;
+    document.getElementById("cPri").innerHTML = `<span class="p-${r.priority}">${r.priority}</span>`;
+    document.getElementById("cStatus").innerHTML = CH.badge(r.status);
+    document.getElementById("cTrack").href = "track.html?id=" + encodeURIComponent(r.id);
+    document.getElementById("formView").hidden = true;
+    document.getElementById("confirmView").hidden = false;
+  });
+  document.getElementById("again").addEventListener("click", () => {
+    f.reset();
+    f.querySelectorAll(".invalid").forEach(el => el.classList.remove("invalid"));
+    document.getElementById("confirmView").hidden = true;
+    document.getElementById("formView").hidden = false;
+  });
+</script>
+</body>
+</html>
