@@ -53,7 +53,3 @@ Then open <http://localhost:5610>. Data is stored only in the browser (simulated
 - Every task is a GitHub Issue (T01–T12) with objective, deliverable, acceptance criteria, dependency, estimate and evidence.
 - Every change reaches `main` through a Pull Request that references its Issue.
 - An Issue is closed only after its deliverable is merged and checked against the Definition of Done in the quality plan.
-
-## Use of AI
-
-AI assistance (Claude, Anthropic) was used to help draft documents and the prototype, as permitted by the lecturer. The student reviewed, edited and is accountable for all content.

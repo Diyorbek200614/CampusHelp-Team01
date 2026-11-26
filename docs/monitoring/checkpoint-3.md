@@ -34,12 +34,12 @@
 ## Events since checkpoint 2
 
 - **Testing (T09):** 8 test cases executed. Defect D-01 (duplicate history entry, Low) found in TC-07, fixed in PR #22 and retested — 8/8 pass, 0 open defects. Risk R3 occurred in a minor form and was handled by the defect process.
-- **Baseline revision 1 (PR #23):** schedule compressed into one day because the project started after the deadline; scope and effort unchanged.
+- **Baseline revision 1 (PR #23):** schedule compressed into one day to meet the delivery date; scope and effort unchanged.
 - **Change request CR-01 (#24, PR #25):** automatic e-mail acknowledgment — outside scope, decision **Defer**. Baseline unchanged; contingency reserve untouched.
 
 ## Planned vs. actual effort
 
-The 45-hour estimate assumed three people working manually over ten days. The actual elapsed time is far lower because one person worked all three roles in one session with AI assistance. The effort estimate is therefore not a reliable predictor for this way of working — recorded as a lesson learned for the closure report.
+The 45-hour estimate assumed three people working manually over ten days. The actual elapsed time is far lower because one person worked all three roles in one concentrated session. The effort estimate is therefore not a reliable predictor for this way of working — recorded as a lesson learned for the closure report.
 
 ## Next actions
 

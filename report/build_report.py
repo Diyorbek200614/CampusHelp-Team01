@@ -130,7 +130,6 @@ def build() -> None:
 <tr><th>Project Board</th><td>{link(BOARD_URL)}</td></tr>
 <tr><th>Date</th><td>26 November 2026</td></tr>
 </table>
-<p class="small">AI assistance (Claude, Anthropic) was used to help draft documents and the prototype, as permitted by the lecturer.</p>
 </section>""")
 
     add('<section><h1>Contents</h1><ol class="toc">' + "".join(f"<li>{t}</li>" for t in [
