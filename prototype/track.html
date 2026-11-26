@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusHelp – Track a request</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <span class="logo">CampusHelp</span>
+  <nav><a href="index.html">Submit request</a><a href="track.html" class="active">Track</a><a href="admin.html">Admin</a></nav>
+</div></header>
+
+<main class="wrap">
+  <h1>Track your request</h1>
+  <p class="sub">Enter the request ID you received after submitting.</p>
+  <form id="tf" class="card" style="display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end">
+    <div class="field" style="flex:1;min-width:200px;margin:0">
+      <label for="rid">Request ID</label>
+      <input type="text" id="rid" placeholder="CH-2026-0001">
+    </div>
+    <button class="btn btn-primary" type="submit">Search</button>
+  </form>
+  <div id="result" style="margin-top:16px"></div>
+  <p class="note">Prototype: data is stored only in this browser (simulated back end).</p>
+</main>
+
+<script src="app.js"></script>
+<script>
+  const out = document.getElementById("result");
+  const input = document.getElementById("rid");
+  function show(id) {
+    const r = CH.find(id);
+    if (!r) {
+      out.innerHTML = `<div class="card empty">No request found with ID <b>${CH.esc(id)}</b>. Check the ID and try again.</div>`;
+      return;
+    }
+    out.innerHTML = `<div class="card">
+      <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+        <span class="rid">${CH.esc(r.id)}</span>${CH.badge(r.status)}
+      </div>
+      <dl class="meta">
+        <dt>Category</dt><dd>${CH.esc(r.category)}</dd>
+        <dt>Priority</dt><dd><span class="p-${r.priority}">${r.priority}</span></dd>
+        <dt>Description</dt><dd>${CH.esc(r.description)}</dd>
+        ${r.location ? `<dt>Location</dt><dd>${CH.esc(r.location)}</dd>` : ""}
+        <dt>Assigned to</dt><dd>${CH.esc(r.assignee || "Not assigned yet")}</dd>
+      </dl>
+      <b>History</b>
+      <ul class="history">${r.history.map(h => `<li>${CH.fmt(h.at)} — ${CH.esc(h.text)}</li>`).join("")}</ul>
+    </div>`;
+  }
+  document.getElementById("tf").addEventListener("submit", e => { e.preventDefault(); show(input.value); });
+  const q = new URLSearchParams(location.search).get("id");
+  if (q) { input.value = q; show(q); }
+</script>
+</body>
+</html>
