@@ -89,7 +89,8 @@ const CH = (() => {
     if (changes.assignee !== undefined && changes.assignee !== r.assignee) {
       r.assignee = changes.assignee;
       r.history.push({ at: now(), text: changes.assignee ? "Assigned to " + changes.assignee : "Assignment removed" });
-      if (changes.assignee && r.status === "Submitted" && !changes.status) changes.status = "Assigned";
+      // D-01: the "Assigned to …" entry already records this event — change status without a second entry.
+      if (changes.assignee && r.status === "Submitted" && !changes.status) r.status = "Assigned";
     }
     if (changes.status && changes.status !== r.status && STATUSES.includes(changes.status)) {
       r.status = changes.status;
