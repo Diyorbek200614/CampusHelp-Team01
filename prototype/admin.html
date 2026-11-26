@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CampusHelp – Administrator dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header><div class="wrap">
+  <span class="logo">CampusHelp · Administrator</span>
+  <nav><a href="index.html">Submit request</a><a href="track.html">Track</a><a href="admin.html" class="active">Admin</a></nav>
+</div></header>
+
+<main class="wrap">
+  <h1>Request dashboard</h1>
+  <p class="sub">Open = Submitted · Ongoing = Assigned + In Progress · Completed = Resolved + Closed</p>
+
+  <div class="tiles">
+    <div class="tile"><div class="n" id="nOpen">0</div><div class="l">Open</div></div>
+    <div class="tile"><div class="n" id="nOngoing">0</div><div class="l">Ongoing</div></div>
+    <div class="tile"><div class="n" id="nDone">0</div><div class="l">Completed</div></div>
+    <div class="tile"><div class="n" id="nTotal">0</div><div class="l">Total</div></div>
+  </div>
+
+  <div class="filters">
+    <select id="fStatus" aria-label="Filter by status"><option value="">All statuses</option></select>
+    <select id="fCat" aria-label="Filter by category"><option value="">All categories</option></select>
+    <select id="fPri" aria-label="Filter by priority"><option value="">All priorities</option></select>
+    <input type="text" id="fId" placeholder="Search ID or text" aria-label="Search">
+  </div>
+
+  <table>
+    <thead><tr><th>ID</th><th>Category</th><th>Priority</th><th>Description</th><th>Assigned to</th><th>Status</th></tr></thead>
+    <tbody id="rows"></tbody>
+  </table>
+
+  <p class="note">Prototype: changes are saved only in this browser. <a href="#" id="reset">Reset sample data</a></p>
+</main>
+
+<script src="app.js"></script>
+<script>
+  const $ = id => document.getElementById(id);
+  CH.STATUSES.forEach(s => $("fStatus").add(new Option(s, s)));
+  CH.CATEGORIES.forEach(c => $("fCat").add(new Option(c, c)));
+  CH.PRIORITIES.forEach(p => $("fPri").add(new Option(p, p)));
+
+  function render() {
+    const all = CH.load();
+    const c = CH.counts(all);
+    $("nOpen").textContent = c.open; $("nOngoing").textContent = c.ongoing;
+    $("nDone").textContent = c.done; $("nTotal").textContent = c.total;
+
+    const q = $("fId").value.trim().toLowerCase();
+    const list = all.filter(r =>
+      (!$("fStatus").value || r.status === $("fStatus").value) &&
+      (!$("fCat").value || r.category === $("fCat").value) &&
+      (!$("fPri").value || r.priority === $("fPri").value) &&
+      (!q || r.id.toLowerCase().includes(q) || r.description.toLowerCase().includes(q)));
+
+    $("rows").innerHTML = list.length ? list.map(r => {
+      const staff = CH.STAFF[r.category] || [];
+      return `<tr data-id="${r.id}">
+        <td data-label="ID"><a href="track.html?id=${encodeURIComponent(r.id)}">${r.id}</a></td>
+        <td data-label="Category">${CH.esc(r.category)}</td>
+        <td data-label="Priority"><span class="p-${r.priority}">${r.priority}</span></td>
+        <td data-label="Description">${CH.esc(r.description)}</td>
+        <td data-label="Assigned to"><select class="assign" aria-label="Assign ${r.id}">
+          <option value="">— Not assigned —</option>
+          ${staff.map(s => `<option ${s === r.assignee ? "selected" : ""}>${CH.esc(s)}</option>`).join("")}
+        </select></td>
+        <td data-label="Status"><select class="status" aria-label="Status ${r.id}">
+          ${CH.STATUSES.map(s => `<option ${s === r.status ? "selected" : ""}>${s}</option>`).join("")}
+        </select></td>
+      </tr>`;
+    }).join("") : `<tr><td colspan="6" class="empty">No requests match the filters.</td></tr>`;
+  }
+
+  $("rows").addEventListener("change", e => {
+    const tr = e.target.closest("tr"); if (!tr) return;
+    const id = tr.dataset.id;
+    if (e.target.classList.contains("assign")) CH.update(id, { assignee: e.target.value });
+    if (e.target.classList.contains("status")) CH.update(id, { status: e.target.value });
+    CH.toast(`${id} updated`);
+    render();
+  });
+  ["fStatus", "fCat", "fPri"].forEach(id => $(id).addEventListener("change", render));
+  $("fId").addEventListener("input", render);
+  $("reset").addEventListener("click", e => { e.preventDefault(); CH.reset(); render(); CH.toast("Sample data restored"); });
+  render();
+</script>
+</body>
+</html>
