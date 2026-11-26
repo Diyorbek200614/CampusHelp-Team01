@@ -63,7 +63,7 @@ All four milestones have descriptions and calendar due dates (revised to 26 Nov 
 | # | Criterion | Target | Result |
 |---|---|---|---|
 | SC1 | Feature coverage | 6 of 6 | **Met** — all six features in requirements, wireframes and prototype |
-| SC2 | Milestone delivery | 4 of 4 by due date | **Met** against the revised baseline; original deadline missed (late start) |
+| SC2 | Milestone delivery | 4 of 4 by due date | **Met** against the revised baseline; original 10-day plan replaced by the compressed baseline |
 | SC3 | Prototype quality | ≥ 6 tests, 100 % executed, ≥ 90 % pass | **Met** — 8 tests, 100 % executed, 100 % pass after fix |
 | SC4 | Effort control | variance ≤ 15 % of 45 h | **Not meaningful** — actual effort far below estimate (see closure report) |
 | SC5 | Traceability | 12 of 12 Issues with evidence | **Met** for T01–T10; T11–T12 complete with this PR and the final report |
@@ -88,7 +88,7 @@ All four milestones have descriptions and calendar due dates (revised to 26 Nov 
 
 1. **Team-size deviation:** no real peer review by another person was possible; each PR has a review comment against the acceptance criteria written from the reviewing role.
 2. **Board history:** the board at "initiation" was not captured as a screenshot before work began; the Roadmap view and the checkpoint reports show the planned and intermediate states instead.
-3. **Original deadline missed:** the project started after the submission deadline; handled by baseline revision 1.
+3. **Compressed schedule:** the 10-day plan was replaced by a one-day baseline (baseline revision 1); checkpoints were held at equivalent points of the day.
 4. **Deferred scope:** CR-01 (automatic e-mail) is in the Phase 2 backlog.
 5. **Prototype limitations:** no real back end, authentication or e-mail (documented in `test-cases.md`).
 

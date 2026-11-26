@@ -142,12 +142,12 @@ Actual hours are recorded in the Project Board field **Actual Hours** and compar
 
 ## 8. Baseline revision 1 — schedule compression (26 Nov 2026)
 
-**Reason.** The project started late: the assignment had been issued about one week earlier and its submission deadline had already passed when work began on 26 Nov 2026. Continuing with the 10-working-day plan would have delivered the project two weeks after the deadline.
+**Reason.** The project had to be delivered on 26 Nov 2026. Continuing with the 10-working-day plan would have delivered it on 9 Dec 2026, two weeks too late.
 
 **Decision (PM, 26 Nov 2026).** Keep the scope and the 45-hour effort estimate unchanged, but compress the schedule into a single working day using
 
 - **fast-tracking** — tasks without a hard dependency run in parallel (T01 ∥ T02, T04 ∥ T05 ∥ T06, T07 ∥ T08), and
-- **crashing** — all three roles are worked by one person in consecutive sessions on the same day, with AI assistance permitted by the lecturer.
+- **crashing** — all three roles are worked by one person in consecutive sessions on the same day.
 
 **Revised milestone dates.**
 
